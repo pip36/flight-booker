@@ -1,0 +1,43 @@
+
+<h1> Book A Flight </h1>
+
+<%= form_tag("", method: "get")  do %>
+  <%= label_tag(:from_airport_id, "from: ")%>
+  <%= select_tag(:from_airport_id, options_for_select(@airports)) %>
+
+  <%= label_tag(:to_airport_id, "to: ") %>
+  <%= select_tag(:to_airport_id, options_for_select(@airports))%>
+<br>
+  <%= label_tag(:date, "Select Date: ") %>
+  <%= select_date() %>
+
+  <%= submit_tag("Search") %>
+<% end %>
+
+
+<%= form_tag(new_booking_path, method: "get") do %>
+
+  <% if @matching_flights && @matching_flights.any? %>
+    <div class="book-block">
+      <%= label_tag "Number of Passengers: " %>
+      <%= select_tag("number_of_passengers", options_for_select([1,2,3,4]))%>
+      <%= submit_tag "Book Flight" %>
+    </div>
+
+    <% @matching_flights.each do |flight| %>
+      <div class="flight-block">
+        <ul>
+          <li> From: <%= flight.from_airport.name %> </li>
+          <li> To: <%= flight.to_airport.name %> </li>
+          <li> Departure Date: <%= flight.date.strftime("%F") %> </li>
+          <li> Departure Time: <%= flight.time.strftime("%T") %> </li>
+          <li> Flight Time: <%= flight.flight_duration.round(2) %> </li>
+        </ul>
+    <!--  <%= hidden_field_tag "selected_flight", flight.id %> -->
+        <%= label_tag "book flight" %>
+        <%= radio_button_tag(:flight, flight.id) %>
+        <p>_____________________________________________</p>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

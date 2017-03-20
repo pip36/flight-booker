@@ -1,0 +1,32 @@
+<p> Your Flight Details </p>
+<ul>
+  <li> From: <%= @flight.from_airport.name %> </li>
+  <li> To: <%= @flight.to_airport.name %> </li>
+  <li> Departure Date: <%= @flight.date.strftime("%F") %> </li>
+  <li> Departure Time: <%= @flight.time.strftime("%T") %> </li>
+  <li> Flight Time: <%= @flight.flight_duration.round(2) %> </li>
+</ul>
+
+<p> For <%= @number_of_passengers %> passengers </p>
+
+<%= form_for @booking do |booking_form| %>
+  <% (1..@number_of_passengers.to_i).each do |i| %>
+
+  <%= hidden_field_tag  @booking.flight_id, @flight.id %>
+  <%= hidden_field_tag  @booking.passenger_id, @passenger.id %>
+  <%= hidden_field_tag  @booking.booking_ref, rand(1000000) %>
+
+      <%= fields_for :passenger, @booking.passenger do |passenger_fields| %>
+      <%= passenger_fields.label "#{i.ordinalize.capitalize} Passenger" %>
+      <%= passenger_fields.label "Name: " %>
+      <%= passenger_fields.text_field :name %>
+
+      <%= passenger_fields.label "Email: " %>
+      <%= passenger_fields.text_field :email %>
+
+      <% end %>
+    <br>
+  <% end %>
+
+  <%= booking_form.submit "Confirm and Book" %>
+<% end %>

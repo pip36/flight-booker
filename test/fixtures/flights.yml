@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  origin_id: 1
+  destination_id: 1
+  start: 2017-03-17 12:17:24
+  flight_duration: 2017-03-17 12:17:24
+
+two:
+  origin_id: 1
+  destination_id: 1
+  start: 2017-03-17 12:17:24
+  flight_duration: 2017-03-17 12:17:24
