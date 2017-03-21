@@ -1,0 +1,20 @@
+<h1> Your Booking </h1>
+
+<p> Your Flight Details </p>
+<ul>
+  <li> From: <%= @flight.from_airport.name %> </li>
+  <li> To: <%= @flight.to_airport.name %> </li>
+  <li> Departure Date: <%= @flight.date.strftime("%F") %> </li>
+  <li> Departure Time: <%= @flight.time.strftime("%T") %> </li>
+  <li> Flight Time: <%= @flight.flight_duration.round(2) %> </li>
+</ul>
+
+<p> For <%= @booking.passengers.count %> passengers </p>
+
+<%= @booking.passengers.each_with_index do |passenger, i| %>
+  <p> <%= (i+1).ordinalize %> Passenger </p>
+  <p> name: <%= passenger.name %> </p>
+  <p> email: <%= passenger.email %> </p>
+<% end %>
+
+<p> Thanks for booking! </p>

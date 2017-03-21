@@ -9,24 +9,25 @@
 
 <p> For <%= @number_of_passengers %> passengers </p>
 
+
+
 <%= form_for @booking do |booking_form| %>
-  <% (1..@number_of_passengers.to_i).each do |i| %>
 
-  <%= hidden_field_tag  @booking.flight_id, @flight.id %>
-  <%= hidden_field_tag  @booking.passenger_id, @passenger.id %>
-  <%= hidden_field_tag  @booking.booking_ref, rand(1000000) %>
+<%= booking_form.hidden_field  :flight_id, value: @flight.id %>
 
-      <%= fields_for :passenger, @booking.passenger do |passenger_fields| %>
-      <%= passenger_fields.label "#{i.ordinalize.capitalize} Passenger" %>
-      <%= passenger_fields.label "Name: " %>
-      <%= passenger_fields.text_field :name %>
+  <% @passengers.each_with_index do |passenger, i| %>
 
-      <%= passenger_fields.label "Email: " %>
-      <%= passenger_fields.text_field :email %>
+      <%= booking_form.fields_for passenger, index: passenger.id do |f| %>
+        <%= f.label "#{(i+1).ordinalize.capitalize} Passenger" %>
+        <%= f.label "Name: " %>
+        <%= f.text_field :name %>
 
+        <%= f.label "Email: " %>
+        <%= f.text_field :email %>
       <% end %>
-    <br>
-  <% end %>
+
+        <br>
+    <% end %>
 
   <%= booking_form.submit "Confirm and Book" %>
 <% end %>
