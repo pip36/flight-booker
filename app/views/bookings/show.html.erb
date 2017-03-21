@@ -11,7 +11,7 @@
 
 <p> For <%= @booking.passengers.count %> passengers </p>
 
-<%= @booking.passengers.each_with_index do |passenger, i| %>
+<% @booking.passengers.each_with_index do |passenger, i| %>
   <p> <%= (i+1).ordinalize %> Passenger </p>
   <p> name: <%= passenger.name %> </p>
   <p> email: <%= passenger.email %> </p>
