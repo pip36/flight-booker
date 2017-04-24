@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20170321154156) do
     t.float    "flight_duration"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["from_airport_id"], name: "index_flights_on_from_airport_id"
+    t.index ["to_airport_id"], name: "index_flights_on_to_airport_id"
   end
 
   create_table "passenger_bookings", force: :cascade do |t|

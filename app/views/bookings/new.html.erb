@@ -1,33 +1,44 @@
-<p> Your Flight Details </p>
-<ul>
-  <li> From: <%= @flight.from_airport.name %> </li>
-  <li> To: <%= @flight.to_airport.name %> </li>
-  <li> Departure Date: <%= @flight.date.strftime("%F") %> </li>
-  <li> Departure Time: <%= @flight.time.strftime("%T") %> </li>
-  <li> Flight Time: <%= @flight.flight_duration.round(2) %> </li>
-</ul>
+<nav class="navbar navbar-inverse">
+  <h1> Book A Flight </h1>
+</nav>
 
-<p> For <%= @number_of_passengers %> passengers </p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2> Your Flight Details </h2>
+      <ul>
+        <li> From: <%= @flight.from_airport.name %> </li>
+        <li> To: <%= @flight.to_airport.name %> </li>
+        <li> Departure Date: <%= @flight.date.strftime("%F") %> </li>
+        <li> Departure Time: <%= @flight.time.strftime("%T") %> </li>
+        <li> Flight Time: <%= @flight.flight_duration.round(2) %> </li>
+      </ul>
+      <p> For <%= @number_of_passengers %> passengers </p>
+    </div>
+  </div>
+</div>
 
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <%= form_for @booking do |booking_form| %>
 
+      <%= booking_form.hidden_field  :flight_id, value: @flight.id %>
 
-<%= form_for @booking do |booking_form| %>
+        <% @passengers.each_with_index do |passenger, i| %>
 
-<%= booking_form.hidden_field  :flight_id, value: @flight.id %>
+          <%= booking_form.fields_for passenger, index: passenger.id do |f| %>
+            <%= f.label "#{(i+1).ordinalize.capitalize} Passenger" %>
+            <%= f.label "Name: " %>
+            <%= f.text_field :name %>
 
-  <% @passengers.each_with_index do |passenger, i| %>
-
-      <%= booking_form.fields_for passenger, index: passenger.id do |f| %>
-        <%= f.label "#{(i+1).ordinalize.capitalize} Passenger" %>
-        <%= f.label "Name: " %>
-        <%= f.text_field :name %>
-
-        <%= f.label "Email: " %>
-        <%= f.text_field :email %>
-      <% end %>
-
+            <%= f.label "Email: " %>
+            <%= f.text_field :email %>
+          <% end %>
         <br>
-    <% end %>
-
-  <%= booking_form.submit "Confirm and Book" %>
-<% end %>
+      <% end %>
+    <%= booking_form.submit "Confirm and Book" %>
+  <% end %>
+    </div>
+  </div>
+</div>

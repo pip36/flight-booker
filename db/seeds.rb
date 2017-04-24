@@ -19,17 +19,17 @@ airports = Airport.create([{name: "Gatwick"},
 airports.each do |airport|
 
    (1..8).each do |i|
-      Flight.create(from_airport_id: airport.id, to_airport_id: i, date: "2017-03-17",
+      Flight.create(from_airport_id: airport.id, to_airport_id: i, date: "2017-04-24",
                   time: "00:00:00", flight_duration: rand(1.0..4.0))
-      Flight.create(from_airport_id: airport.id, to_airport_id: i, date: "2017-03-18",
+      Flight.create(from_airport_id: airport.id, to_airport_id: i, date: "2017-04-25",
                     time: "00:00:00", flight_duration: rand(1.0..4.0))
-      Flight.create(from_airport_id: airport.id, to_airport_id: i, date: "2017-03-19",
+      Flight.create(from_airport_id: airport.id, to_airport_id: i, date: "2017-04-25",
                   time: "00:00:00", flight_duration: rand(1.0..4.0))
-                  Flight.create(from_airport_id: airport.id, to_airport_id: i, date: "2017-03-17",
+                  Flight.create(from_airport_id: airport.id, to_airport_id: i, date: "2017-04-24",
                               time: "00:01:00", flight_duration: rand(1.0..4.0))
-                  Flight.create(from_airport_id: airport.id, to_airport_id: i, date: "2017-03-18",
+                  Flight.create(from_airport_id: airport.id, to_airport_id: i, date: "2017-04-25",
                                 time: "00:01:00", flight_duration: rand(1.0..4.0))
-                  Flight.create(from_airport_id: airport.id, to_airport_id: i, date: "2017-03-19",
+                  Flight.create(from_airport_id: airport.id, to_airport_id: i, date: "2017-04-25",
                               time: "00:01:00", flight_duration: rand(1.0..4.0))
    end
 
