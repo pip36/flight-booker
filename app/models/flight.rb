@@ -5,4 +5,6 @@ class Flight < ApplicationRecord
 
   has_many :bookings
   has_many :passengers, through: :bookings
+
+  default_scope{order(time: :asc)}
 end

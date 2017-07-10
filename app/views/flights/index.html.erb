@@ -9,15 +9,15 @@
       <%= form_tag("", method: "get")  do %>
 
           <%= label_tag(:from_airport_id, "from ")%> <br>
-          <%= select_tag(:from_airport_id, options_for_select(@airports), class:"destination-select") %> <br>
+          <%= select_tag(:from_airport_id, options_for_select(@airports, params[:from_airport_id]), class:"destination-select", id:"from-airport") %> <br>
 
           <%= label_tag(:to_airport_id, "to ") %> <br>
-          <%= select_tag(:to_airport_id, options_for_select(@airports), class:"destination-select")%> <br>
+          <%= select_tag(:to_airport_id, options_for_select(@airports, params[:to_airport_id]), class:"destination-select", id:"to-airport")%> <br>
 
-          <%= label_tag(:date, "Date ") %> <br>
+          <%= label_tag(:date, "Date (all flights are on 1st Jan 2017, for test purposes)") %> <br>
           <%= select_date() %> <br>
 
-          <%= submit_tag("Search") %> <br>
+          <%= submit_tag("Search", class:"search-button") %> <br>
 
       <% end %>
     </div>
@@ -53,7 +53,11 @@
     <!--  <%= hidden_field_tag "selected_flight", flight.id %> -->
           </div>
         <% end %>
+
+        <% else %>
+        <div class='alert alert-danger'> No flights on this date! </div>
       <% end %>
+
     <% end %>
     </div>
   </div>
