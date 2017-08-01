@@ -5,22 +5,34 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 flight">
       <h2> Your Flight Details </h2>
-      <ul>
-        <li> From: <%= @flight.from_airport.name %> </li>
-        <li> To: <%= @flight.to_airport.name %> </li>
-        <li> Departure Date: <%= @flight.date.strftime("%F") %> </li>
-        <li> Departure Time: <%= @flight.time.strftime("%T") %> </li>
-        <li> Flight Time: <%= @flight.flight_duration.round(2) %> </li>
-      </ul>
-      <p> For <%= @booking.passengers.count %> passengers </p>
-      <% @booking.passengers.each_with_index do |passenger, i| %>
-        <p> <u><%= (i+1).ordinalize %> Passenger</u> </p>
-        <p> <strong>name:</strong> <%= passenger.name %> </p>
-        <p> <strong>email:</strong> <%= passenger.email %> </p>
-      <% end %>
-      <h3> Thanks for booking! </h3>
+      <div>
+        <ul class="flight-content">
+            <li> <h3> <%= @flight.from_airport.name %> </h3> </li>
+            <li> <%= image_tag("right.png") %> </li>
+            <li> <h3> <%= @flight.to_airport.name %> </h3> </li>
+        </ul>
+      </div>
+      <div class="flight_duration">
+        <h4> <%= @flight.flight_duration.round(2) %>  hours </h4>
+      </div>
+      <div>
+        <h4> Departs at <%= @flight.time.strftime("%T") %>, on <%= @flight.date.strftime("%F") %> </h4>
+      </div>
+      <div>
+        <ul class="passengers-list">
+          <% @booking.passengers.each_with_index do |passenger, i| %>
+            <li>
+              <h3> <u><%= (i+1).ordinalize %> Passenger</u> </h3>
+              <h4><strong>name:</strong> <%= passenger.name %> </h4>
+              <h4><strong>email:</strong> <%= passenger.email %> </h4>
+            </li>
+          <% end %>
+        </ul>
+        <h3> Thanks for booking! </h3>
+      </div>
     </div>
   </div>
+  
 </div>
